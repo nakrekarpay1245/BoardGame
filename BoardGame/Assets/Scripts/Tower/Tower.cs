@@ -9,9 +9,13 @@ public class Tower : MonoBehaviour
     [SerializeField]
     private int deactiveTileSortingOrder;
 
-    [Header("Entity Level")]
+    [Header("Tower Level")]
     [SerializeField]
     private int level;
+
+    [Header("Tower Type")]
+    [SerializeField]
+    private TowerType type;
 
     [Header("References")]
     [SerializeField]
@@ -19,13 +23,15 @@ public class Tower : MonoBehaviour
 
     private void Awake()
     {
-        spriteRendererComponent = GetComponent<SpriteRenderer>();
+        spriteRendererComponent = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
     {
-        transform.DOScale(0, 0);
-        transform.DOScale(1, TimeManager.singleton.GetUIDelay()).SetEase(Ease.Flash);
+        Sequence startSequence = DOTween.Sequence();
+        startSequence.Append(transform.DOScale(0, 0));
+        startSequence.Append(transform.DOScale(0, TimeManager.singleton.GetUIDelay()));
+        startSequence.Append(transform.DOScale(1, TimeManager.singleton.GetUIDelay()).SetEase(Ease.Flash));
     }
 
     /// <summary>
@@ -45,27 +51,21 @@ public class Tower : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts the SendRoutine coroutine and sets the sorting order of
-    /// the sprite renderer component to the deactive tile sorting order
+    /// Returns the level of the tower
     /// </summary>
-    public void Send(Vector3 buttonPosition)
+    /// <returns></returns>
+    public int GetTowerLevel()
     {
-        SetParent(null);
-        transform.DOMove(buttonPosition, TimeManager.singleton.GetUIDelay()).OnComplete(() =>
-        {
-            ParticleManager.singleton.PlayParticleAtPoint(transform.position);
-            AudioManager.singleton.PlaySound("SparkleSFX");
-        });
-        spriteRendererComponent.sortingOrder = deactiveTileSortingOrder;
+        return level;
     }
 
     /// <summary>
-    /// Returns the level of the entity
+    /// Returns the type of the tower
     /// </summary>
     /// <returns></returns>
-    public int GetEntityLevel()
+    public TowerType GetTowerType()
     {
-        return level;
+        return type;
     }
 
     /// <summary>

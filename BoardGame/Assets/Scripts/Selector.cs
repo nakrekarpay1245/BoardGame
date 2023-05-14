@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,19 +11,10 @@ public class Selector : MonoSingleton<Selector>
 
     [Header("Tower")]
     [SerializeField]
-    private Tower primitiveTowerPrefab = null;
+    private List<Tower> primitiveTowerPrefabList = null;
     private Tower currentTower = null;
 
     private int randomTileCallCount;
-
-    [Header("Produce")]
-    [SerializeField]
-    private Image produceButtonFill;
-
-    [Header("Auto Produce")]
-    [SerializeField]
-    private float autoProduceTime = 10;
-    private float produceTimer;
 
     private Touch touch;
 
@@ -56,42 +48,6 @@ public class Selector : MonoSingleton<Selector>
         {
             currentTower?.ResetPosition();
         }
-
-        CalculateProduceTimer();
-    }
-
-    /// <summary>
-    /// Calculates the produce timer and checks if it's time to produce a new entity
-    /// </summary>
-    private void CalculateProduceTimer()
-    {
-        if (produceTimer >= autoProduceTime)
-        {
-            produceTimer = 0;
-            ProduceTower();
-        }
-        else
-        {
-            produceTimer += Time.deltaTime;
-        }
-
-        DisplayProduceTimer();
-    }
-
-    /// <summary>
-    /// Decreases the produce timer by 1
-    /// </summary>
-    public void IncreaseProduceTimer()
-    {
-        produceTimer++;
-    }
-
-    /// <summary>
-    /// Displays the produce timer by updating the fill amount of the produce button fill image.
-    /// </summary>
-    private void DisplayProduceTimer()
-    {
-        produceButtonFill.fillAmount = produceTimer / autoProduceTime;
     }
 
     /// <summary>
@@ -170,43 +126,65 @@ public class Selector : MonoSingleton<Selector>
         {
             if (!lastTile.GetIsFull())
             {
-                firstTile.Clear();
-                lastTile.SetTower(currentTower);
-                currentTower?.Deselect();
-                currentTower = null;
+                currentTower?.ResetPosition();
+
+                //firstTile.Clear();
+                //lastTile.SetTower(currentTower);
+                //currentTower?.Deselect();
+                //currentTower = null;
 
                 AudioManager.singleton.PlaySound("ChangeSFX");
             }
             else
             {
-                if (lastTile.GetTower().GetEntityLevel() == currentTower.GetEntityLevel())
+                if (lastTile.GetTower().GetTowerType() == currentTower.GetTowerType())
                 {
-                    firstTile.Clear();
-                    lastTile.SetTower(currentTower);
-                    currentTower.Deselect();
-                    currentTower = null;
+                    if (lastTile.GetTower().GetTowerLevel() == currentTower.GetTowerLevel())
+                    {
+                        firstTile.Clear();
+                        lastTile.SetTower(currentTower);
+                        currentTower.Deselect();
+                        currentTower = null;
 
-                    ParticleManager.singleton.PlayParticleAtPoint(lastTile.transform.position);
+                        ParticleManager.singleton.PlayParticleAtPoint(lastTile.transform.position);
 
-                    AudioManager.singleton.PlaySound("SparkleSFX");
+                        AudioManager.singleton.PlaySound("SparkleSFX");
+                    }
+                    else
+                    {
+                        currentTower?.ResetPosition();
+                        //Tower firstTileEntity = firstTile.GetTower();
+
+                        //firstTile.Clear();
+                        //firstTile.SetTower(lastTile.GetTower());
+
+                        //lastTile.Clear();
+                        //lastTile.SetTower(firstTileEntity);
+                        //currentTower.Deselect();
+                        //currentTower = null;
+
+                        AudioManager.singleton.PlaySound("ChangeSFX");
+                    }
                 }
                 else
                 {
-                    Tower firstTileEntity = firstTile.GetTower();
+                    currentTower?.ResetPosition();
+                    //Tower firstTileEntity = firstTile.GetTower();
 
-                    firstTile.Clear();
-                    firstTile.SetTower(lastTile.GetTower());
+                    //firstTile.Clear();
+                    //firstTile.SetTower(lastTile.GetTower());
 
-                    lastTile.Clear();
-                    lastTile.SetTower(firstTileEntity);
-                    currentTower.Deselect();
-                    currentTower = null;
+                    //lastTile.Clear();
+                    //lastTile.SetTower(firstTileEntity);
+                    //currentTower.Deselect();
+                    //currentTower = null;
 
                     AudioManager.singleton.PlaySound("ChangeSFX");
                 }
             }
         }
     }
+
 
     /// <summary>
     /// This function generates an Entity object and places it on a randomly selected
@@ -215,20 +193,26 @@ public class Selector : MonoSingleton<Selector>
     /// </summary>
     public void ProduceTower()
     {
-        randomTileCallCount = 0;
-
-        Tile randomTile = GetRandomTile();
-        if (!randomTile)
+        if (EconomyManager.singleton.CanProduce())
         {
-            return;
+            randomTileCallCount = 0;
+
+            Tile randomTile = GetRandomTile();
+            if (!randomTile)
+            {
+                return;
+            }
+
+            int randomPrimitiveTowerIndex = Random.Range(0, primitiveTowerPrefabList.Count);
+            Tower primitiveTowerPrefab = primitiveTowerPrefabList[randomPrimitiveTowerIndex];
+
+            Tower generatedTower = randomTile ?
+                Instantiate(primitiveTowerPrefab, randomTile.transform) : null;
+            randomTile?.SetTower(generatedTower);
+
+            ParticleManager.singleton.PlayParticleAtPoint(randomTile.transform.position);
+            AudioManager.singleton.PlaySound("PopSFX");
         }
-
-        Tower generatedEntity = randomTile ?
-            Instantiate(primitiveTowerPrefab, randomTile.transform) : null;
-        randomTile?.SetTower(generatedEntity);
-
-        ParticleManager.singleton.PlayParticleAtPoint(randomTile.transform.position);
-        AudioManager.singleton.PlaySound("PopSFX");
     }
 
     /// <summary>

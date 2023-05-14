@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private int towerLevel;
+    private TowerType towerType;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Tile : MonoBehaviour
     {
         transform.DOScale(0, 0);
         transform.DOScale(1, TimeManager.singleton.GetUIDelay()).SetEase(Ease.Flash);
+        TileManager.singleton.AddTile(this);
     }
 
     /// <summary>
@@ -42,19 +44,21 @@ public class Tile : MonoBehaviour
 
                 Clear();
 
-                Tower newEntity = 
-                    Instantiate(TowerManager.singleton.GetTowerWithIndex(towerLevel + 1),
+                Tower newTower =
+                    Instantiate(TowerManager.singleton.GetNextTower(towerLevel, towerType),
                     transform.position, Quaternion.identity);
 
-                currentTower = newEntity;
+                currentTower = newTower;
                 currentTower.SetParent(transform);
-                towerLevel = currentTower.GetEntityLevel();
+                towerLevel = currentTower.GetTowerLevel();
+                towerType = currentTower.GetTowerType();
             }
             else
             {
                 currentTower = tower;
                 currentTower.SetParent(transform);
-                towerLevel = currentTower.GetEntityLevel();
+                towerLevel = currentTower.GetTowerLevel();
+                towerType = currentTower.GetTowerType();
             }
 
             spriteRenderer.sprite = fullTileSprite;
