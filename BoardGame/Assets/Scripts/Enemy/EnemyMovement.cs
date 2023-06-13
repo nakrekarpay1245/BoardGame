@@ -1,24 +1,32 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
     [Header("Movement Parameters")]
-    [SerializeField]
     private float moveSpeed;
-    [SerializeField]
     private float stoppingDistance;
-    [SerializeField]
-    private List<Transform> patrolPointList;
+
+    public List<Transform> patrolPointList;
 
     private Vector3 patrolPoint;
     private int patrolIndex = -1;
 
-    private void Start()
+    private EnemyAI enemyAI;
+
+    private void Awake()
     {
-        SetTargetPosition();
-        EnemyManager.singleton.AddEnemyToList(this);
+        enemyAI = GetComponentInParent<EnemyAI>();
+    }
+
+    public void SetSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+
+    public void SetStoppingDistance(float distance)
+    {
+        stoppingDistance = distance;
     }
 
     private void Update()
@@ -43,14 +51,19 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            PlayerBase.singleton.DecreaseHealth();
-            gameObject.SetActive(false);
-            Debug.Log("Road finished!");
+            enemyAI.AttackToBase();
+            enemyAI.DestroyEnemy();
         }
+
+        Vector3 targetDirection = patrolPoint - transform.position;
+        targetDirection.z = 0;
+        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     public void SetPatrolPointList(List<Transform> patrolPointList)
     {
         this.patrolPointList = patrolPointList;
+        SetTargetPosition();
     }
 }

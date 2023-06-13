@@ -21,7 +21,17 @@ public class PlayerBase : MonoSingleton<PlayerBase>
     public void DecreaseHealth()
     {
         currentHealth--;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Dead();
+        }
         DisplayHealth();
+    }
+
+    public void Dead()
+    {
+        LevelManager.singleton.FinishLevel(false);
     }
 
     public void IncreaseHealth()

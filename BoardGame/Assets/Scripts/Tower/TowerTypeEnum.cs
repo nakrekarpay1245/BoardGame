@@ -2,10 +2,11 @@ public class TowerTypeEnum
 {
 }
 
+[System.Serializable]
 public enum TowerType
 {
     AIR,
     FIRE,
-    SOIL,
+    EARTH,
     WATER
 }

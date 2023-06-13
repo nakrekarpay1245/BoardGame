@@ -10,9 +10,9 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         {
             singleton = (T)this;
         }
-        else if (singleton != this)
+        else
         {
-            Destroy(gameObject);
+            Destroy(singleton);
         }
     }
 

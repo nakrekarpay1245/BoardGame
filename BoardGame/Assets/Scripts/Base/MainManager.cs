@@ -14,10 +14,11 @@ public class MainManager : MonoBehaviour
 
     public void OpenSettingsButton()
     {
-        settingsMenu.transform.DOScale(1, TimeManager.singleton.GetUIDelay());
+        settingsMenu.transform.DOScale(1, TimeManager.GetUIDelay());
     }
+
     public void CloseSettingsButton()
     {
-        settingsMenu.transform.DOScale(0, TimeManager.singleton.GetUIDelay());
+        settingsMenu.transform.DOScale(0, TimeManager.GetUIDelay());
     }
 }

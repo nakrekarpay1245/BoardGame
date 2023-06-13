@@ -1,18 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Health Parameters")]
     [SerializeField]
-    private int maxHealth;
-    private int currentHealth;
+    protected float maxHealth;
+    private float currentHealth;
 
     private SpriteRenderer spriteRendererComponent;
+    [SerializeField]
+    private Color normalColor;
+    [SerializeField]
+    private Color hitColor;
+
+    protected EnemyAI enemyAI;
     private void Awake()
     {
         spriteRendererComponent = GetComponentInChildren<SpriteRenderer>();
+        enemyAI = GetComponent<EnemyAI>();
     }
 
     private void Start()
@@ -20,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -34,11 +40,10 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void Dead()
+    protected virtual void Dead()
     {
-        EnemyManager.singleton.RemoveEnemyFromList(GetComponent<EnemyMovement>());
-        EconomyManager.singleton.IncreaseCoin(maxHealth);
-        gameObject.SetActive(false);
+        StopAllCoroutines();
+        enemyAI.Dead();
     }
 
     private void HitEffect()
@@ -49,9 +54,8 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator HitEffectRoutine()
     {
-        Color startColor = spriteRendererComponent.color;
-        spriteRendererComponent.color = Color.white;
-        yield return new WaitForSeconds(TimeManager.singleton.GetUIDelay2());
-        spriteRendererComponent.color = startColor;
+        spriteRendererComponent.color = hitColor;
+        yield return new WaitForSeconds(TimeManager.GetUIDelay2());
+        spriteRendererComponent.color = normalColor;
     }
 }
