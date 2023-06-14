@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,16 +7,20 @@ public class TimeManager : MonoSingleton<TimeManager>
     [SerializeField]
     private static float uiDelay = 0.125f;
 
-
     [Header("Level Time")]
     [SerializeField]
     private TextMeshProUGUI levelTimeText;
     [SerializeField]
     private float levelTime = 120;
 
+    [SerializeField]
+    private bool isMenu;
     private void Start()
     {
-        StartCoroutine(TimeProgressRoutine());
+        if (!isMenu)
+        {
+            StartCoroutine(TimeProgressRoutine());
+        }
     }
 
     private IEnumerator TimeProgressRoutine()
