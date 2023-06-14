@@ -3,6 +3,7 @@
 Proje Açıklaması: Bu proje, Rush Royale gibi bir kule savunma oyunudur. Oyuncular, dalgalar halinde gelen düşmanlara karşı element kartlarını yerleştirir ve stratejik hamleler yaparak onları durdurmaya çalışır.
 
 ![Oyun Ekran Görüntüsü](BoardGame/Assets/Images/ScreenShoots/BattleMenu.png)
+![Oyun Ekran Görüntüsü](BoardGame/Assets/Images/ScreenShoots/BattleInGame_1.png)
 
 ## Roadmap
 
