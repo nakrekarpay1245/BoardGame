@@ -31,7 +31,7 @@ This roadmap serves as a guide to plan the future development of the project. Be
 
 ## How to Contribute
 
-Eğer projemize katkıda bulunmak isterseniz, aşağıdaki adımları izleyebilirsiniz:
+If you would like to contribute to our project, you can follow these steps:
 
 1. Fork this repository (https://github.com/nakrekarpay1245/BoardGame/fork)
 2. Clone it to your computer: `git clone https://github.com/nakrekarpay1245/BoardGame.git`
