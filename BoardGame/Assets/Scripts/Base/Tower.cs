@@ -18,22 +18,25 @@ public class Tower : MonoBehaviour
     [Header("Tower Level")]
     [SerializeField]
     private int level;
+    public int TowerLevel => level;
     [SerializeField]
     private int maxLevel = 4;
+    public bool IsMax => level >= maxLevel;
 
     [Header("Tower Type")]
     [SerializeField]
     private TowerType type;
+    public TowerType TowerType => type;
 
-    [Header("References")]
-    private SpriteRenderer spriteRendererComponent;
-    private Gun towerGun;
-    protected Tile towerTile;
+    private SpriteRenderer _spriteRendererComponent;
+    private Gun _towerGun;
+    protected Tile _towerTile;
+    public Tile TowerTile => _towerTile;
 
     private void Awake()
     {
-        spriteRendererComponent = GetComponentInChildren<SpriteRenderer>();
-        towerGun = GetComponentInChildren<Gun>();
+        _spriteRendererComponent = GetComponentInChildren<SpriteRenderer>();
+        _towerGun = GetComponentInChildren<Gun>();
     }
 
     private void Start()
@@ -65,13 +68,13 @@ public class Tower : MonoBehaviour
     public void SetDamage()
     {
         //Debug.Log("Damage Setted!");
-        towerGun.SetDamage(damage);
+        _towerGun.SetDamage(damage);
     }
 
     public void SetShootTime()
     {
         //Debug.Log("ShootTime Setted!");
-        towerGun.SetShootTime(shootTime);
+        _towerGun.SetShootTime(shootTime);
     }
 
     /// <summary>
@@ -79,7 +82,7 @@ public class Tower : MonoBehaviour
     /// </summary>
     public void Select()
     {
-        spriteRendererComponent.sortingOrder = activeTileSortingOrder;
+        _spriteRendererComponent.sortingOrder = activeTileSortingOrder;
     }
 
     /// <summary>
@@ -87,34 +90,7 @@ public class Tower : MonoBehaviour
     /// </summary>
     public void Deselect()
     {
-        spriteRendererComponent.sortingOrder = deactiveTileSortingOrder;
-    }
-
-    /// <summary>
-    /// Returns the level of the tower
-    /// </summary>
-    /// <returns></returns>
-    public int GetTowerLevel()
-    {
-        return level;
-    }
-
-    /// <summary>
-    /// It checks if the tower is at its maximum
-    /// </summary>
-    /// <returns></returns>
-    public bool IsMax()
-    {
-        return level >= maxLevel;
-    }
-
-    /// <summary>
-    /// Returns the type of the tower
-    /// </summary>
-    /// <returns></returns>
-    public TowerType GetTowerType()
-    {
-        return type;
+        _spriteRendererComponent.sortingOrder = deactiveTileSortingOrder;
     }
 
     /// <summary>
@@ -124,7 +100,7 @@ public class Tower : MonoBehaviour
     public void SetParent(Transform parentTransform)
     {
         transform.parent = parentTransform;
-        towerTile = GetComponentInParent<Tile>();
+        _towerTile = GetComponentInParent<Tile>();
         ResetPosition();
     }
 
@@ -136,21 +112,7 @@ public class Tower : MonoBehaviour
         transform.DOLocalMove(Vector3.zero, TimeManager.GetUIDelay());
     }
 
-    /// <summary>
-    /// Returns the sprite associated with the sprite renderer component.
-    /// </summary>
-    /// <returns></returns>
-    public Sprite GetSprite()
-    {
-        return spriteRendererComponent.sprite;
-    }
-
     public virtual void Deactive()
     {
-    }
-
-    public Tile GetTile()
-    {
-        return towerTile;
     }
 }

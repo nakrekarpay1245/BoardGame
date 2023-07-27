@@ -4,21 +4,14 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     protected Tower currentTower;
-
-    //[Header("Tile Visualize")]
-    //[SerializeField]
-    //protected Sprite emptyTileSprite;
-    //[SerializeField]
-    //protected Sprite fullTileSprite;
-
-    //protected SpriteRenderer spriteRenderer;
+    public Tower Tower => currentTower;
 
     protected int towerLevel;
     protected TowerType towerType;
+    public bool IsFull => currentTower;
 
     private void Awake()
     {
-        //spriteRenderer = GetComponent<SpriteRenderer>();
         SetTower(GetComponentInChildren<Tower>());
     }
 
@@ -53,28 +46,11 @@ public class Tile : MonoBehaviour
     }
 
     /// <summary>
-    /// </summary>
-    /// <returns></returns>
-    public Tower GetTower()
-    {
-        return currentTower;
-    }
-
-    /// <summary>
     /// This function clears the current entity on the tile, making it empty, and sets the tile
     /// sprite to the emptyTileSprite
     /// </summary>
     public void Clear()
     {
         currentTower = null;
-        //spriteRenderer.sprite = emptyTileSprite;
-    }
-
-    /// <summary>
-    /// </summary>
-    /// <returns></returns>
-    public bool GetIsFull()
-    {
-        return currentTower;
     }
 }

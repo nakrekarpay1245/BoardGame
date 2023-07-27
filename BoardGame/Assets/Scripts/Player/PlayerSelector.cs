@@ -35,7 +35,7 @@ public class PlayerSelector : MonoSingleton<PlayerSelector>
             {
                 if (currentTower)
                 {
-                    if (!currentTower.IsMax())
+                    if (!currentTower.IsMax)
                     {
                         SelectLastTile();
                         if (lastTile && firstTile && currentTower)
@@ -86,7 +86,7 @@ public class PlayerSelector : MonoSingleton<PlayerSelector>
             return;
         }
 
-        currentTower = firstTile.GetTower();
+        currentTower = firstTile.Tower;
         currentTower?.Select();
     }
 
@@ -135,7 +135,7 @@ public class PlayerSelector : MonoSingleton<PlayerSelector>
     {
         if (lastTile)
         {
-            if (!lastTile.GetIsFull())
+            if (!lastTile.IsFull)
             {
                 currentTower?.ResetPosition();
 
@@ -143,9 +143,9 @@ public class PlayerSelector : MonoSingleton<PlayerSelector>
             }
             else
             {
-                if (lastTile.GetTower().GetTowerType() == currentTower.GetTowerType())
+                if (lastTile.Tower.TowerType == currentTower.TowerType)
                 {
-                    if (lastTile.GetTower().GetTowerLevel() == currentTower.GetTowerLevel())
+                    if (lastTile.Tower.TowerLevel == currentTower.TowerLevel)
                     {
                         firstTile.Clear();
                         lastTile.SetTower(currentTower);
@@ -170,7 +170,6 @@ public class PlayerSelector : MonoSingleton<PlayerSelector>
             }
         }
     }
-
 
     /// <summary>
     /// This function generates an Entity object and places it on a randomly selected
@@ -197,7 +196,7 @@ public class PlayerSelector : MonoSingleton<PlayerSelector>
 
             randomTile?.SetTower(generatedTower);
 
-            ParticleManager2.singleton.PlayParticleAtPoint("PlacementParticle",
+            ParticleManager.singleton.PlayParticleAtPoint("PlacementParticle",
                 randomTile.transform.position);
 
             AudioManager.singleton.PlaySound("PopSFX");
@@ -246,7 +245,7 @@ public class PlayerSelector : MonoSingleton<PlayerSelector>
             Tile randomTile = PlayerTileManager.singleton.GetActiveTileList()[Random.Range(0,
                 PlayerTileManager.singleton.GetActiveTileList().Count)];
 
-            if (randomTile.GetIsFull())
+            if (randomTile.IsFull)
             {
                 randomTileCallCount++;
                 return GetRandomTile();

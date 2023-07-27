@@ -26,21 +26,20 @@ public class PlayerTile : Tile
 
                 currentTower = newTower;
                 currentTower.SetParent(transform);
-                towerLevel = currentTower.GetTowerLevel();
-                towerType = currentTower.GetTowerType();
+                towerLevel = currentTower.TowerLevel;
+                towerType = currentTower.TowerType;
 
-                ParticleManager2.singleton.PlayParticleAtPoint("CombineParticle",
+                ParticleManager.singleton.PlayParticleAtPoint("CombineParticle",
                     transform.position + (Vector3.down / 4));
             }
             else
             {
                 currentTower = tower;
                 currentTower.SetParent(transform);
-                towerLevel = currentTower.GetTowerLevel();
-                towerType = currentTower.GetTowerType();
+                towerLevel = currentTower.TowerLevel;
+                towerType = currentTower.TowerType;
             }
 
-            //spriteRenderer.sprite = fullTileSprite;
             PopScale();
         }
     }

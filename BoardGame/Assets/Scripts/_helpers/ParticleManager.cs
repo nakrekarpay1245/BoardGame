@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleManager2 : MonoSingleton<ParticleManager2>
+public class ParticleManager : MonoSingleton<ParticleManager>
 {
     [System.Serializable]
     public class ParticleInfo

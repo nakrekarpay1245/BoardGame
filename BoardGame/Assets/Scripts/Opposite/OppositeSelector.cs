@@ -34,7 +34,7 @@ public class OppositeSelector : MonoSingleton<OppositeSelector>
 
             randomTile?.SetTower(generatedTower);
 
-            ParticleManager2.singleton.PlayParticleAtPoint("PlacementParticle",
+            ParticleManager.singleton.PlayParticleAtPoint("PlacementParticle",
                 randomTile.transform.position);
 
             AudioManager.singleton.PlaySound("PopSFX");
@@ -54,7 +54,7 @@ public class OppositeSelector : MonoSingleton<OppositeSelector>
             Tile randomTile = OppositeTileManager.singleton.GetActiveTileList()[Random.Range(0,
                 OppositeTileManager.singleton.GetActiveTileList().Count)];
 
-            if (randomTile.GetIsFull())
+            if (randomTile.IsFull)
             {
                 randomTileCallCount++;
                 return GetRandomTile();

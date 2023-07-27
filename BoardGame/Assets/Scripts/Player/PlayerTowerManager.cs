@@ -40,7 +40,7 @@ public class PlayerTowerManager : MonoSingleton<PlayerTowerManager>
 
     public void AddTower(Tower tower)
     {
-        TowerType type = tower.GetTowerType();
+        TowerType type = tower.TowerType;
 
         switch (type)
         {
@@ -67,7 +67,7 @@ public class PlayerTowerManager : MonoSingleton<PlayerTowerManager>
 
     public void RemoveTower(Tower tower)
     {
-        TowerType type = tower.GetTowerType();
+        TowerType type = tower.TowerType;
 
         switch (type)
         {

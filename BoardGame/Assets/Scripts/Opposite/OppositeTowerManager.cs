@@ -47,7 +47,7 @@ public class OppositeTowerManager : MonoSingleton<OppositeTowerManager>
 
     public void AddTower(Tower tower)
     {
-        TowerType type = tower.GetTowerType();
+        TowerType type = tower.TowerType;
 
         switch (type)
         {
@@ -74,7 +74,7 @@ public class OppositeTowerManager : MonoSingleton<OppositeTowerManager>
 
     public void RemoveTower(Tower tower)
     {
-        TowerType type = tower.GetTowerType();
+        TowerType type = tower.TowerType;
 
         switch (type)
         {
@@ -132,15 +132,15 @@ public class OppositeTowerManager : MonoSingleton<OppositeTowerManager>
                 if (i != j)
                 {
                     Tower oppositeTowerI = generatedAirTowerList[i];
-                    Tile oppositeTileI = oppositeTowerI.GetTile();
+                    Tile oppositeTileI = oppositeTowerI.TowerTile;
                     Tower oppositeTowerJ = generatedAirTowerList[j];
-                    Tile oppositeTileJ = oppositeTowerJ.GetTile();
+                    Tile oppositeTileJ = oppositeTowerJ.TowerTile;
 
-                    if (oppositeTowerI.GetTowerType() == oppositeTowerJ.GetTowerType())
+                    if (oppositeTowerI.TowerType == oppositeTowerJ.TowerType)
                     {
-                        if (oppositeTowerI.GetTowerLevel() == oppositeTowerJ.GetTowerLevel())
+                        if (oppositeTowerI.TowerLevel == oppositeTowerJ.TowerLevel)
                         {
-                            if (!oppositeTowerI.IsMax())
+                            if (!oppositeTowerI.IsMax)
                             {
                                 oppositeTileJ.SetTower(oppositeTowerI);
                                 oppositeTileI.Clear();
@@ -180,15 +180,15 @@ public class OppositeTowerManager : MonoSingleton<OppositeTowerManager>
                 if (i != j)
                 {
                     Tower oppositeTowerI = generatedEarthTowerList[i];
-                    Tile oppositeTileI = oppositeTowerI.GetTile();
+                    Tile oppositeTileI = oppositeTowerI.TowerTile;
                     Tower oppositeTowerJ = generatedEarthTowerList[j];
-                    Tile oppositeTileJ = oppositeTowerJ.GetTile();
+                    Tile oppositeTileJ = oppositeTowerJ.TowerTile;
 
-                    if (oppositeTowerI.GetTowerType() == oppositeTowerJ.GetTowerType())
+                    if (oppositeTowerI.TowerType == oppositeTowerJ.TowerType)
                     {
-                        if (oppositeTowerI.GetTowerLevel() == oppositeTowerJ.GetTowerLevel())
+                        if (oppositeTowerI.TowerLevel == oppositeTowerJ.TowerLevel)
                         {
-                            if (!oppositeTowerI.IsMax())
+                            if (!oppositeTowerI.IsMax)
                             {
                                 oppositeTileJ.SetTower(oppositeTowerI);
                                 oppositeTileI.Clear();
@@ -228,15 +228,15 @@ public class OppositeTowerManager : MonoSingleton<OppositeTowerManager>
                 if (i != j)
                 {
                     Tower oppositeTowerI = generatedFireTowerList[i];
-                    Tile oppositeTileI = oppositeTowerI.GetTile();
+                    Tile oppositeTileI = oppositeTowerI.TowerTile;
                     Tower oppositeTowerJ = generatedFireTowerList[j];
-                    Tile oppositeTileJ = oppositeTowerJ.GetTile();
+                    Tile oppositeTileJ = oppositeTowerJ.TowerTile;
 
-                    if (oppositeTowerI.GetTowerType() == oppositeTowerJ.GetTowerType())
+                    if (oppositeTowerI.TowerType == oppositeTowerJ.TowerType)
                     {
-                        if (oppositeTowerI.GetTowerLevel() == oppositeTowerJ.GetTowerLevel())
+                        if (oppositeTowerI.TowerLevel == oppositeTowerJ.TowerLevel)
                         {
-                            if (!oppositeTowerI.IsMax())
+                            if (!oppositeTowerI.IsMax)
                             {
                                 oppositeTileJ.SetTower(oppositeTowerI);
                                 oppositeTileI.Clear();
@@ -276,15 +276,15 @@ public class OppositeTowerManager : MonoSingleton<OppositeTowerManager>
                 if (i != j)
                 {
                     Tower oppositeTowerI = generatedWaterTowerList[i];
-                    Tile oppositeTileI = oppositeTowerI.GetTile();
+                    Tile oppositeTileI = oppositeTowerI.TowerTile;
                     Tower oppositeTowerJ = generatedWaterTowerList[j];
-                    Tile oppositeTileJ = oppositeTowerJ.GetTile();
+                    Tile oppositeTileJ = oppositeTowerJ.TowerTile;
 
-                    if (oppositeTowerI.GetTowerType() == oppositeTowerJ.GetTowerType())
+                    if (oppositeTowerI.TowerType == oppositeTowerJ.TowerType)
                     {
-                        if (oppositeTowerI.GetTowerLevel() == oppositeTowerJ.GetTowerLevel())
+                        if (oppositeTowerI.TowerLevel == oppositeTowerJ.TowerLevel)
                         {
-                            if (!oppositeTowerI.IsMax())
+                            if (!oppositeTowerI.IsMax)
                             {
                                 oppositeTileJ.SetTower(oppositeTowerI);
                                 oppositeTileI.Clear();

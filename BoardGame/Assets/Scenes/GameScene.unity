@@ -2066,7 +2066,7 @@ MonoBehaviour:
   waterTowerUpgradePriceText: {fileID: 55265921}
   towerPrice: 0
   towerPriceText: {fileID: 1226748567}
-  coinCount: 200
+  coinCount: 500
   coinCountText: {fileID: 2075086448}
 --- !u!1 &329246486
 GameObject:
@@ -4674,8 +4674,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 782089392}
-  - component: {fileID: 782089393}
-  - component: {fileID: 782089394}
   m_Layer: 0
   m_Name: ParticleManager
   m_TagString: Untagged
@@ -4698,40 +4696,6 @@ Transform:
   m_Father: {fileID: 1809178131}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &782089393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782089391}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d4e85f2efabd74ca2893748f42cb66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particlePrefabList:
-  - {fileID: 4902284570494449015, guid: 55f47f505dc9a0a4a9845ff30ae47438, type: 3}
-  - {fileID: 4647639971450697567, guid: 1515466912694d64f8704e0107172a9d, type: 3}
-  particleCount: 10
-  particleList: []
---- !u!114 &782089394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782089391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd811c883a9092d4f93682e6ad5d99b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleList:
-  - particlePrefab: {fileID: 708643045627193206, guid: 55f47f505dc9a0a4a9845ff30ae47438, type: 3}
-    particleSystem: {fileID: 4902284570494449015, guid: 55f47f505dc9a0a4a9845ff30ae47438, type: 3}
-  - particlePrefab: {fileID: 863162328011887802, guid: 1515466912694d64f8704e0107172a9d, type: 3}
-    particleSystem: {fileID: 4902284570494449015, guid: 55f47f505dc9a0a4a9845ff30ae47438, type: 3}
 --- !u!1 &795338725
 GameObject:
   m_ObjectHideFlags: 0
@@ -7167,7 +7131,7 @@ MonoBehaviour:
   - {fileID: 1801729862}
   - {fileID: 1414542244}
   - {fileID: 1695376934}
-  generateTime: 2
+  generateTime: 1.5
   minimumGenerateTime: 0.1
   enemyPrefab: {fileID: 441405394015664619, guid: 67d3faba312adfd4db86e8be33fbc493, type: 3}
   generatePoint: {fileID: 1528239189}
@@ -9621,7 +9585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPrice: 0
-  coinCount: 200
+  coinCount: 500
   controlTime: 1
 --- !u!1 &1416669816
 GameObject:
@@ -11390,6 +11354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTimeText: {fileID: 234658168}
   levelTime: 30
+  isMenu: 0
 --- !u!1001 &1751453594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12444,7 +12409,7 @@ MonoBehaviour:
   - {fileID: 405181336}
   - {fileID: 814770804}
   - {fileID: 721108686}
-  generateTime: 2
+  generateTime: 1.5
   minimumGenerateTime: 0.1
   enemyPrefab: {fileID: 5238450314274339829, guid: 27a2ae1d32b686945940368e2a2bb3f0, type: 3}
   generatePoint: {fileID: 557059800}

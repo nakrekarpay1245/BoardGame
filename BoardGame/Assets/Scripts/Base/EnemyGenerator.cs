@@ -19,7 +19,6 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     private Transform generatePoint;
 
-
     private void Start()
     {
         nextGenerateTime = Time.time + 1;
